@@ -2,14 +2,14 @@ const Post = require("../models/Posts");
 const User = require("../models/Users");
 module.exports.createPost = async (req, res) => {
   try {
-    const { userId, discription, picturesPath } = req.body;
+    const { userId, discription, picturePath } = req.body;
     const user = await User.findById(userId);
     const newUser = new Post({
       userId,
       firstName: user.firstName,
       lastName: user.lastName,
       location: user.loaction,
-      userPicturePath: user.picturesPath,
+      userPicturePath: user.picturePath,
       discription,
       likes: {},
       comments: [],

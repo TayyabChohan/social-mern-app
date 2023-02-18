@@ -9,14 +9,14 @@ module.exports.register = async (req, res) => {
       lastName,
       email,
       password,
-      picturesPath,
+      picturePath,
       friends,
       loaction,
       occopation,
       viewedProfile,
       impressions,
     } = req.body;
-
+    console.log(req.body, "tayyab");
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     const newUsers = new User({
@@ -24,7 +24,7 @@ module.exports.register = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      picturesPath,
+      picturePath,
       friends,
       loaction,
       occopation,

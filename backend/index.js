@@ -23,7 +23,9 @@ const app = express();
 //confguartiona//
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
-app.use("/static", express.static(path.join(__dirname, "public/assets")));
+app.use("/static", express.static(path.join(__dirname, "/public")));
+// app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('uploads'));
 dotenv.config();
 app.use(cors());
 app.use(express.json());
@@ -37,10 +39,11 @@ app.use(bodyparser.urlencoded({ limit: "30mb", extended: true }));
 ///file storage///
 
 const storage = multer.diskStorage({
-  destination: function (req, res, cb) {
-    cd(null, "public/assets");
+  destination: function (req, file, cb) {
+    cb(null, "./uploads");
   },
-  filename: function (req, res, cb) {
+  filename: function (req, file, cb) {
+    // console.log(file, 'tayyan')
     cb(null, file.originalname);
   },
 });
