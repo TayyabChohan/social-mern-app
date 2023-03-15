@@ -1,13 +1,10 @@
 const User = require("../models/Users");
 
-//   getUsers,
-//   getUsersFreind,
-//   addRemoveFriend,
 module.exports.getUsers = async (req, res) => {
   try {
     const { id } = req.params;
     const currentUser = await User.findById(id);
-    res.status(200).send(currentUser);
+    res.status(200).json(currentUser);
   } catch (err) {
     res.status(500).json({ msg: err.message });
   }
@@ -15,7 +12,10 @@ module.exports.getUsers = async (req, res) => {
 module.exports.getUsersFreind = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(req.params, "sadasd");
     const currentUser = await User.findById(id);
+    console.log(currentUser, "currentUser");
+
     const friends = new Promise.all(
       currentUser.friends.map((id) => currentUser.findById(id))
     );
@@ -26,8 +26,8 @@ module.exports.getUsersFreind = async (req, res) => {
         email,
         picturePath,
         friends,
-        loaction,
-        occopation,
+        location,
+        occupation,
         viewedProfile,
         impressions,
       }) => {
@@ -37,8 +37,8 @@ module.exports.getUsersFreind = async (req, res) => {
           email,
           picturePath,
           friends,
-          loaction,
-          occopation,
+          location,
+          occupation,
           viewedProfile,
           impressions,
         };
@@ -74,8 +74,8 @@ module.exports.addRemoveFriend = async (req, res) => {
         email,
         picturePath,
         friends,
-        loaction,
-        occopation,
+        location,
+        occupation,
         viewedProfile,
         impressions,
       }) => {
@@ -85,8 +85,8 @@ module.exports.addRemoveFriend = async (req, res) => {
           email,
           picturePath,
           friends,
-          loaction,
-          occopation,
+          location,
+          occupation,
           viewedProfile,
           impressions,
         };

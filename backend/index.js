@@ -50,10 +50,10 @@ const storage = multer.diskStorage({
 const uplaod = multer({ storage });
 // Routes with files///
 app.post("/auth/register", uplaod.single("picture"), register);
-app.post("/posts", jwtoken, uplaod.single("picture"), createPost);
+app.post("/posts", uplaod.single("picture"), createPost);
 ///Routes
 app.use("/auth", authRoutes);
-app.use("/user", usersRoutes);
+app.use("/users", usersRoutes);
 app.use("/posts", userPosts);
 
 const port = process.env.PORT || 6001;

@@ -8,7 +8,7 @@ module.exports.createPost = async (req, res) => {
       userId,
       firstName: user.firstName,
       lastName: user.lastName,
-      location: user.loaction,
+      location: user.location,
       userPicturePath: user.picturePath,
       discription,
       likes: {},

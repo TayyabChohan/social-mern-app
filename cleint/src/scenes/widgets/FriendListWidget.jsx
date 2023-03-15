@@ -9,22 +9,25 @@ const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
-  const friends = useSelector((state) => state.user.friends);
+  const friends = useSelector((state) => state?.user?.friends);
+  console.log(userId, "userId tayyab");
+  console.log(friends, "friends");
 
   const getFriends = async () => {
     const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
+      `http://localhost:5001/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       }
     );
     const data = await response.json();
+    // console.log(data, "tayyab");
     dispatch(setFriends({ friends: data }));
   };
 
   useEffect(() => {
-    getFriends();
+    // getFriends();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -38,15 +41,15 @@ const FriendListWidget = ({ userId }) => {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {friends.map((friend) => (
+        {/* {friends?.map((friend) => (
           <Friend
-            key={friend._id}
-            friendId={friend._id}
-            name={`${friend.firstName} ${friend.lastName}`}
-            subtitle={friend.occupation}
-            userPicturePath={friend.picturePath}
+            key={friend?._id}
+            friendId={friend?._id}
+            name={`${friend?.firstName} ${friend?.lastName}`}
+            subtitle={friend?.occupation}
+            userPicturePath={friend?.picturePath}
           />
-        ))}
+        ))} */}
       </Box>
     </WidgetWrapper>
   );

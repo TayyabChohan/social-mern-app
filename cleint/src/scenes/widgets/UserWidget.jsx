@@ -20,11 +20,10 @@ const UserWidget = ({ userId, picturePath }) => {
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
-
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`http://localhost:5001/users/${userId}`, {
       method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}`},
     });
     const data = await response.json();
     setUser(data);
@@ -37,7 +36,7 @@ const UserWidget = ({ userId, picturePath }) => {
   if (!user) {
     return null;
   }
-
+  console.log(user, "user");
   const {
     firstName,
     lastName,
@@ -57,7 +56,7 @@ const UserWidget = ({ userId, picturePath }) => {
         onClick={() => navigate(`/profile/${userId}`)}
       >
         <FlexBetween gap="1rem">
-          <UserImage image={picturePath} />
+          <UserImage image={"picturePath"} />
           <Box>
             <Typography
               variant="h4"
@@ -72,7 +71,7 @@ const UserWidget = ({ userId, picturePath }) => {
             >
               {firstName} {lastName}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            <Typography color={medium}>{friends?.length} friends</Typography>
           </Box>
         </FlexBetween>
         <ManageAccountsOutlined />

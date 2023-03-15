@@ -11,7 +11,7 @@ module.exports.register = async (req, res) => {
       password,
       picturePath,
       friends,
-      loaction,
+      location,
       occopation,
       viewedProfile,
       impressions,
@@ -26,12 +26,13 @@ module.exports.register = async (req, res) => {
       password: passwordHash,
       picturePath,
       friends,
-      loaction,
+      location,
       occopation,
       viewedProfile: Math.floor(Math.random() * 1000),
       impressions: Math.floor(Math.random() * 1000),
     });
     const savedUser = await newUsers.save();
+    console.log(savedUser, "savedUser");
     res.status(201).json(savedUser);
   } catch (err) {
     res.status(5001).json({ error: err.message });
